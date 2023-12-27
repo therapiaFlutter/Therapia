@@ -1,35 +1,30 @@
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:therapia_flutter_application/core/widgets/OnboardingPageModel.dart';
 
-class IntroScreens extends StatelessWidget  {
+class IntroScreens extends StatelessWidget {
   const IntroScreens({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context)  {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: OnboardingPagePresenter(pages: [
         OnboardingPageModel(
           title: 'Educational Content',
-          description: "Check out Therapeia's Educational Resources! Get expert-recommended content for a better understanding of common student challenges.",
+          description:
+              "Check out Therapeia's Educational Resources! Get expert-recommended content for a better understanding of common student challenges.",
           image: Image.asset("lib/core/assets/images/blogs.png"),
-          
         ),
         OnboardingPageModel(
           title: 'Psychotherapist Directory',
-          description: 'Therapeia simplifies finding your ideal psychotherapist! Explore our professionals dedicated to improving your mental health.',
+          description:
+              'Therapeia simplifies finding your ideal psychotherapist! Explore our professionals dedicated to improving your mental health.',
           image: Image.asset("lib/core/assets/images/Psychologist.png"),
-        
-          
         ),
         OnboardingPageModel(
           title: 'Instant Appointments',
-          description: "Scheduling your session with Therapeia is effortless! Choose from our Psychotherapist Directory and set a time that works for you.",
+          description:
+              "Scheduling your session with Therapeia is effortless! Choose from our Psychotherapist Directory and set a time that works for you.",
           image: Image.asset("lib/core/assets/images/appointment.png"),
-          
         ),
       ]),
     );
@@ -41,7 +36,8 @@ class OnboardingPagePresenter extends StatefulWidget {
   final VoidCallback? onSkip;
   final VoidCallback? onFinish;
 
-  const OnboardingPagePresenter({Key? key, required this.pages, this.onSkip, this.onFinish})
+  const OnboardingPagePresenter(
+      {Key? key, required this.pages, this.onSkip, this.onFinish})
       : super(key: key);
 
   @override
@@ -95,8 +91,10 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                                 ),
                               ),
                               Container(
-                                constraints: const BoxConstraints(maxWidth: 280),
-                                padding: const EdgeInsets.symmetric(horizontal: 1.0, vertical: 8.0),
+                                constraints:
+                                    const BoxConstraints(maxWidth: 280),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 1.0, vertical: 8.0),
                                 child: Text(
                                   item.description,
                                   textAlign: TextAlign.center,
@@ -113,18 +111,21 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: widget.pages.map(
-                  (item) => AnimatedContainer(
-                    duration: const Duration(milliseconds: 250),
-                    width: _currentPage == widget.pages.indexOf(item) ? 30 : 8,
-                    height: 8,
-                    margin: const EdgeInsets.all(2.0),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF5D5AE0),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                ).toList(),
+                children: widget.pages
+                    .map(
+                      (item) => AnimatedContainer(
+                        duration: const Duration(milliseconds: 250),
+                        width:
+                            _currentPage == widget.pages.indexOf(item) ? 30 : 8,
+                        height: 8,
+                        margin: const EdgeInsets.all(2.0),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF5D5AE0),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                    )
+                    .toList(),
               ),
               SizedBox(
                 height: 100,
@@ -135,10 +136,13 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                       style: TextButton.styleFrom(
                         visualDensity: VisualDensity.comfortable,
                         foregroundColor: const Color(0xFF272665),
-                        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        textStyle: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       onPressed: () {
-                        widget.onSkip?.call();
+                        {
+                          Navigator.pushNamed(context, "/welcome");
+                        }
                       },
                       child: const Text("Skip"),
                     ),
@@ -146,11 +150,12 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                       style: TextButton.styleFrom(
                         visualDensity: VisualDensity.comfortable,
                         foregroundColor: const Color(0xFF272665),
-                        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        textStyle: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       onPressed: () {
                         if (_currentPage == widget.pages.length - 1) {
-                          widget.onFinish?.call();
+                          Navigator.pushNamed(context, "/welcome");
                         } else {
                           _pageController.animateToPage(
                             _currentPage + 1,
@@ -162,11 +167,15 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                       child: Row(
                         children: [
                           Text(
-                            _currentPage == widget.pages.length - 1 ? "Finish" : "Next",
+                            _currentPage == widget.pages.length - 1
+                                ? "Finish"
+                                : "Next",
                           ),
                           const SizedBox(width: 8),
                           Icon(
-                            _currentPage == widget.pages.length - 1 ? Icons.done : Icons.arrow_forward,
+                            _currentPage == widget.pages.length - 1
+                                ? Icons.done
+                                : Icons.arrow_forward,
                           ),
                         ],
                       ),
@@ -181,4 +190,3 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
     );
   }
 }
-
