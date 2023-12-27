@@ -20,7 +20,7 @@ class CustomButtonStyle extends StatelessWidget {
          borderRadius: BorderRadius.circular(48),
          
        ),
-       height: 70,
+       height: 65,
        width: 300,
        child: Center(
          child: Text(

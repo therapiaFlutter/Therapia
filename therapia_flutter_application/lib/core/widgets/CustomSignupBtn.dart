@@ -16,12 +16,12 @@ class CustomSignupBtn extends StatelessWidget {
        
        margin: const EdgeInsets.symmetric(horizontal: 35),
        decoration: BoxDecoration(
-         color: Color(0xFFF0EFF6),
-         borderRadius: BorderRadius.circular(48),
+         color: Color(0xFFF5F5F5),
+         borderRadius: BorderRadius.circular(40),
         border: Border.all(color: Color(0xFF734BFB))
          
        ),
-       height: 70,
+       height: 65,
        width: 300,
        child: Center(
          child: Text(
