@@ -17,12 +17,11 @@ class OnboardingPageModel {
     required this.description,
     required this.image,
     Gradient? bgColor,
-    Color textColor = Colors.black,
     this.titleStyle = const TextStyle(
-      fontSize: 24, color: Color(0xFF272665), fontFamily: 'Quicksand', fontWeight: FontWeight.w600,
+      fontSize: 24, color: Color(0xFF734BFB), fontFamily: 'Quicksand', fontWeight: FontWeight.w800,
     ),
     this.descriptionStyle = const TextStyle(
-      fontSize: 16, color: Color(0xFF707070), fontFamily: 'Quicksand', fontWeight: FontWeight.w400,
+      fontSize: 16, color: Color.fromARGB(255, 65, 64, 64), fontFamily: 'Quicksand', fontWeight: FontWeight.w500, 
     ),
   }) : bgColor = bgColor ?? PageBackground.getBackgroundColor();
 }
