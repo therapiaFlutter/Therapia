@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:therapia_flutter_application/core/widgets/OnboardingPageModel.dart';
+import 'package:therapia_flutter_application/core/widgets/NavigateAnimation.dart';
+import 'package:therapia_flutter_application/Pages/welcome_page.dart';
+
 
 class IntroScreens extends StatelessWidget {
   const IntroScreens({Key? key}) : super(key: key);
@@ -141,7 +144,8 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                       ),
                       onPressed: () {
                         {
-                          Navigator.pushNamed(context, "/welcome");
+                          Navigator.of(context).push(
+                              NavigateAnimation.customPageRoute(Welcome()));
                         }
                       },
                       child: const Text("Skip"),
@@ -155,7 +159,8 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                       ),
                       onPressed: () {
                         if (_currentPage == widget.pages.length - 1) {
-                          Navigator.pushNamed(context, "/welcome");
+                          Navigator.of(context).push(
+                              NavigateAnimation.customPageRoute(Welcome()));
                         } else {
                           _pageController.animateToPage(
                             _currentPage + 1,
@@ -168,13 +173,13 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                         children: [
                           Text(
                             _currentPage == widget.pages.length - 1
-                                ? "Finish"
+                                ? "Start"
                                 : "Next",
                           ),
                           const SizedBox(width: 8),
                           Icon(
                             _currentPage == widget.pages.length - 1
-                                ? Icons.done
+                                ? Icons.arrow_forward
                                 : Icons.arrow_forward,
                           ),
                         ],
