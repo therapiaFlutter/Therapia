@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:therapia_flutter_application/core/widgets/CustomLoginBtn.dart';
+import 'package:therapia_flutter_application/core/widgets/NavigateAnimation.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/widgets/CustomTextField.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/widgets/SquareTile.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/pages/SignupPage.dart';
@@ -80,7 +81,10 @@ class LoginPage extends StatelessWidget {
                     // sign-in button
                     CustomButtonStyle(
                       onTap: () {
-                        Navigator.pushNamed(context, "/signup");
+                        Navigator.of(context).push(
+                              NavigateAnimation.customPageRoute(Signup()));
+                      
+
                       },
                       btnText: 'Login',
                     ),
@@ -133,10 +137,10 @@ class LoginPage extends StatelessWidget {
                     // Register now link
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Signup()),
-                        );
+                        Navigator.of(context).push(
+                              NavigateAnimation.customPageRoute(Signup()));
+                      
+
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
