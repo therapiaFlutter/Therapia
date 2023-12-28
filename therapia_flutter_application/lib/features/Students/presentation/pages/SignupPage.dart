@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:therapia_flutter_application/core/widgets/CustomLoginBtn.dart';
-import 'package:therapia_flutter_application/features/Students/presentation/pages/HomePage.dart';
+import 'package:therapia_flutter_application/core/widgets/BottomNavBar.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/widgets/CustomTextField.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/widgets/SquareTile.dart';
 import 'package:therapia_flutter_application/core/colors/PageBackground.dart';
@@ -85,7 +85,7 @@ class Signup extends StatelessWidget {
                           }
                             
                           Navigator.of(context).push(
-                              NavigateAnimation.customPageRoute(HomePage()));
+                              NavigateAnimation.customPageRoute(GoogleBottomBar()));
                       
 
                         },
