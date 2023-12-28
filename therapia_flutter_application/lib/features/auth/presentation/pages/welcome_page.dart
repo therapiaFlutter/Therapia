@@ -5,8 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:therapia_flutter_application/core/colors/PageBackground.dart';
 import 'package:therapia_flutter_application/core/widgets/CustomLoginBtn.dart';
 import 'package:therapia_flutter_application/core/widgets/CustomSignupBtn.dart';
-import 'package:therapia_flutter_application/features/auth/presentation/pages/LoginPage.dart';
 import 'package:therapia_flutter_application/core/widgets/NavigateAnimation.dart';
+import 'package:therapia_flutter_application/features/auth/presentation/pages/LoginPage.dart';
 import 'package:therapia_flutter_application/features/auth/presentation/pages/SignupPage.dart';
 
 //hedhi supposé auth_page
@@ -65,7 +65,7 @@ class Welcome extends StatelessWidget {
                         CustomSignupBtn(
                         onTap: () {
                           Navigator.of(context).push(
-                              NavigateAnimation.customPageRoute(RegisterPage()));
+                              NavigateAnimation.customPageRoute(Signup()));
                         },
                         btnText: "Signup",
                       ),

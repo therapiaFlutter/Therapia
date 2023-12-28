@@ -18,10 +18,21 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^2.0.5
   salomon_bottom_bar: ^3.0.0
+  firebase_auth: ^4.15.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_bloc: ^8.1.1
+  dartz: ^0.10.1
+  equatable: ^2.0.5
+  get_it:
+  internet_connection_checker: ^1.0.0+1
+  shared_preferences: ^2.0.15
+  # gestion de la navigation  API 2.0(Declarative) 1.0(impérative)
+  #Navigator.push(...)xxxx déconseillé 1.0
+  go_router: ^6.0.0
+  validators:
 
   flutter_lints: ^2.0.0
 

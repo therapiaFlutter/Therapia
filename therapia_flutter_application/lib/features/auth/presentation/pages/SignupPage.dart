@@ -1,12 +1,12 @@
 // ignore_for_file: prefer_const_constructors, file_names, prefer_const_literals_to_create_immutables
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:therapia_flutter_application/core/widgets/CustomLoginBtn.dart';
-import 'package:therapia_flutter_application/core/widgets/BottomNavBar.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/widgets/CustomTextField.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/widgets/SquareTile.dart';
 import 'package:therapia_flutter_application/core/colors/PageBackground.dart';
-import 'package:therapia_flutter_application/features/Students/presentation/pages/LoginPage.dart';
+import 'package:therapia_flutter_application/features/auth/presentation/pages/LoginPage.dart';
 import 'package:therapia_flutter_application/core/exceptions/FormValidation.dart';
 import 'package:therapia_flutter_application/core/widgets/NavigateAnimation.dart';
 
@@ -14,11 +14,26 @@ class Signup extends StatelessWidget {
   Signup({Key? key});
 
   // text editing controllers
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
-  final emailController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  Future<void> _registerUser(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+
+      Navigator.of(context)
+          .push(NavigateAnimation.customPageRoute(LoginPage()));
+    } on FirebaseAuthException catch (e) {
+      // Handle registration failures, you can display an error message
+      print("Error during registration: ${e.message}");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,16 +93,13 @@ class Signup extends StatelessWidget {
                       const SizedBox(height: 30),
 
                       // sign-in button
+                      // Inside your CustomButtonStyle widget, update the onTap function
                       CustomButtonStyle(
                         onTap: () {
                           if (_formKey.currentState?.validate() ?? false) {
                             _formKey.currentState?.save();
+                            _registerUser(context);
                           }
-                            
-                          Navigator.of(context).push(
-                              NavigateAnimation.customPageRoute(GoogleBottomBar()));
-                      
-
                         },
                         btnText: 'Create Account',
                       ),

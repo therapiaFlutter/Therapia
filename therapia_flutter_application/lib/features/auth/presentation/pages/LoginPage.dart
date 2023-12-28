@@ -2,11 +2,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:therapia_flutter_application/core/widgets/CustomLoginBtn.dart';
-import 'package:therapia_flutter_application/core/widgets/NavigateAnimation.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/widgets/CustomTextField.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/widgets/SquareTile.dart';
-import 'package:therapia_flutter_application/features/Students/presentation/pages/SignupPage.dart';
+import 'package:therapia_flutter_application/features/auth/domain/entities/user_entity.dart';
+import 'package:therapia_flutter_application/features/auth/presentation/bloc/auth/auth_bloc.dart';
+import 'package:therapia_flutter_application/features/auth/presentation/pages/SignupPage.dart';
 import 'package:therapia_flutter_application/core/colors/PageBackground.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+
+import 'package:go_router/go_router.dart';
+import 'package:validators/validators.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key});
@@ -81,10 +91,15 @@ class LoginPage extends StatelessWidget {
                     // sign-in button
                     CustomButtonStyle(
                       onTap: () {
-                        Navigator.of(context).push(
-                              NavigateAnimation.customPageRoute(Signup()));
-                      
+                        // Dispatch the login event to the bloc
+                        final user = UserEntity(
+                          name: "",
+                          email: usernameController.text.trim(),
+                          password: passwordController.text.trim(),
+                        );
 
+                        BlocProvider.of<AuthBloc>(context)
+                            .add(LoginEvent(user: user));
                       },
                       btnText: 'Login',
                     ),
@@ -137,10 +152,11 @@ class LoginPage extends StatelessWidget {
                     // Register now link
                     InkWell(
                       onTap: () {
-                        Navigator.of(context).push(
-                              NavigateAnimation.customPageRoute(Signup()));
-                      
-
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Signup()),
+                        );
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

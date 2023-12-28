@@ -2,6 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:therapia_flutter_application/core/colors/PageBackground.dart';
+import 'package:therapia_flutter_application/features/auth/presentation/bloc/auth/auth_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
+
 
 class Settings extends StatefulWidget {
  const Settings({Key? key}) : super(key: key);
@@ -59,6 +65,7 @@ class _SettingsState extends State<Settings> {
                 ),
                 _CustomListTile(
                   title: "Sign out",
+                
                   icon: Icons.exit_to_app_rounded,
                 ),
               ],
@@ -72,32 +79,70 @@ class _SettingsState extends State<Settings> {
 }
 
 class _CustomListTile extends StatelessWidget {
- final String title;
- final IconData icon;
- final Widget? trailing;
- const _CustomListTile({
-  Key? key,
-  required this.title,
-  required this.icon,
-  this.trailing,
- }) : super(key: key);
+  final String title;
+  final IconData icon;
+  final Widget? trailing;
 
- @override
- Widget build(BuildContext context) {
-  return ListTile(
-    title: Text(
-      title,
-      style: TextStyle(
-        fontFamily: 'Quicksand',
-        fontWeight: FontWeight.w600,
-        
+  const _CustomListTile({
+    Key? key,
+    required this.title,
+    required this.icon,
+    this.trailing,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        title,
+        style: TextStyle(
+          fontFamily: 'Quicksand',
+          fontWeight: FontWeight.w600,
+        ),
       ),
-    ),
-    leading: Icon(icon),
-    trailing: trailing,
-    onTap: () {},
+      leading: Icon(icon),
+      trailing: trailing,
+      onTap: () {
+        // Perform logout action here
+        _showLogoutDialog(context);
+      },
+    );
+  }
+
+void _showLogoutDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Logout"),
+        content: Text("Are you sure you want to logout?"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context); // Close the dialog
+            },
+            child: Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () {
+              // Perform actual logout action here
+              // For example, you can dispatch a logout event to your authentication bloc
+              // AuthBlocProvider.of(context).logout();
+             BlocProvider.of<AuthBloc>(context).add(LogoutEvent());
+            // Use GoRouter to navigate to the login page
+              GoRouter.of(context).go('/login');
+
+              Navigator.pop(context); // Close the dialog
+            },
+            child: Text("Logout"),
+          ),
+        ],
+      );
+    },
   );
- }
+}
+
+
 }
 
 class _SingleSection extends StatelessWidget {

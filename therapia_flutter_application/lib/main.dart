@@ -1,27 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:therapia_flutter_application/Pages/intro_screens.dart';
-import 'package:therapia_flutter_application/Pages/welcome_page.dart';
-import 'package:therapia_flutter_application/features/Students/presentation/pages/LoginPage.dart';
-import 'package:therapia_flutter_application/features/Students/presentation/pages/SignupPage.dart';
-import 'package:therapia_flutter_application/features/Students/presentation/pages/HomePage.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:therapia_flutter_application/features/auth/presentation/bloc/auth/auth_bloc.dart';
+import 'package:therapia_flutter_application/features/auth/presentation/bloc/user_manager/user_manager_bloc.dart';
+import 'package:therapia_flutter_application/navigation/app_router.dart';
+import 'firebase_options.dart';
+import 'injection_container.dart' as di;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: "/", routes: {
-      "/": (context) => const IntroScreens(),
-      "/welcome": (context) => const Welcome(),
-      "/login": (context) =>  LoginPage(),
-      "/signup": (context) =>  Signup(),
-      "/home": (context) =>  HomePage(),
-    });
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => di.sl<AuthBloc>(),
+        ),
+        BlocProvider(create: (_) => di.sl<UserManagerBloc>()),
+      ],
+      child: BlocBuilder<AuthBloc, AuthState>(
+        builder: (context, state) {
+          return MaterialApp.router(
+            title: 'Therapeia',
+            routerConfig: di.sl<AppRouter>().router,
+          );
+        },
+      ),
+    );
   }
 }
