@@ -1,9 +1,12 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/pages/HomePage.dart';
-import 'package:therapia_flutter_application/features/Students/presentation/pages/AppointmentsPage.dart';
-import 'package:therapia_flutter_application/features/Students/presentation/pages/BlogsPage.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/pages/PsychotherapistsPage.dart';
+import 'package:therapia_flutter_application/features/Students/presentation/pages/BlogsPage.dart';
+import 'package:therapia_flutter_application/features/Students/presentation/pages/SettingsPage.dart';
+
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -13,13 +16,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Your App Title',
       home: const GoogleBottomBar(),
     );
   }
 }
-
-
 
 class GoogleBottomBar extends StatefulWidget {
   const GoogleBottomBar({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class _GoogleBottomBarState extends State<GoogleBottomBar> {
     HomePage(),
     BlogsPage(),
     PsychotherapistsPage(),
-    AppointmentsPage(),
+    Settings()
   ];
 
   @override
@@ -44,7 +44,7 @@ class _GoogleBottomBarState extends State<GoogleBottomBar> {
       body: _pages[_selectedIndex],
       bottomNavigationBar: SalomonBottomBar(
         currentIndex: _selectedIndex,
-        selectedItemColor: const Color(0xFF734BFB),
+        selectedItemColor: const Color(0xff6200ee),
         unselectedItemColor: const Color(0xff757575),
         onTap: (index) {
           setState(() {
@@ -60,22 +60,38 @@ class _GoogleBottomBarState extends State<GoogleBottomBar> {
 final _navBarItems = [
   SalomonBottomBarItem(
     icon: const Icon(Icons.home),
-    title: const Text("Home"),
+    title: const Text(
+      "Home",
+      style: TextStyle(
+           fontFamily: 'Quicksand', fontWeight: FontWeight.w500),
+    ),
     selectedColor: Color(0xFF734BFB),
   ),
   SalomonBottomBarItem(
     icon: const Icon(Icons.feed),
-    title: const Text("Blogs"),
+    title: const Text(
+      "Blogs",
+      style: TextStyle(
+           fontFamily: 'Quicksand', fontWeight: FontWeight.w500),
+    ),
     selectedColor: Color(0xFF734BFB),
   ),
   SalomonBottomBarItem(
     icon: const Icon(Icons.person),
-    title: const Text("Psychotherapists"),
+    title: const Text(
+      "Psychotherapists",
+      style: TextStyle(
+           fontFamily: 'Quicksand', fontWeight: FontWeight.w500),
+    ),
     selectedColor: Color(0xFF734BFB),
   ),
   SalomonBottomBarItem(
-    icon: const Icon(Icons.calendar_today),
-    title: const Text("Appointments"),
+    icon: const Icon(Icons.settings),
+    title: const Text(
+      "Settings",
+      style: TextStyle(
+           fontFamily: 'Quicksand', fontWeight: FontWeight.w500),
+    ),
     selectedColor: Color(0xFF734BFB),
   ),
 ];
