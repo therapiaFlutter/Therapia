@@ -6,10 +6,10 @@ class Psychotherapist {
  final String? description; 
 
  Psychotherapist({
+    this.id,
     this.name,
     this.image,
-    this.location,
-   this.id, 
+    this.location, 
    this.description, 
  });
 }
