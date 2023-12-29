@@ -48,7 +48,7 @@ class PsychotherapistsPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8.0),
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage(therapist.image), // Change to AssetImage
+                          image: AssetImage(therapist.image!), // Change to AssetImage
                         ),
                       ),
                     ),
@@ -60,7 +60,7 @@ class PsychotherapistsPage extends StatelessWidget {
                         children: [
                           SizedBox(height: 10),
                           Text(
-                            therapist.name,
+                            therapist.name!,
                             style: TextStyle(
                               fontFamily: 'Quicksand',
                               fontWeight: FontWeight.w800,
@@ -76,7 +76,7 @@ class PsychotherapistsPage extends StatelessWidget {
                                   color: Colors.grey, size: 16),
                               const SizedBox(width: 4),
                               Text(
-                                therapist.location,
+                                therapist.location!,
                                 style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 14,

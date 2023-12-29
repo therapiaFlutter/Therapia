@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<AuthBloc, AuthState>(
         builder: (context, state) {
           return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
             title: 'Therapeia',
             routerConfig: di.sl<AppRouter>().router,
           );
