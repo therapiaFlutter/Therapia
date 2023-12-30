@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:therapia_flutter_application/core/widgets/BottomNavBar.dart';
 import 'package:therapia_flutter_application/core/widgets/OnboardingPageModel.dart';
 import 'package:therapia_flutter_application/core/widgets/NavigateAnimation.dart';
 import 'package:therapia_flutter_application/features/auth/presentation/pages/welcome_page.dart';
@@ -144,7 +145,7 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                       onPressed: () {
                         {
                           Navigator.of(context).push(
-                              NavigateAnimation.customPageRoute(Welcome()));
+                              NavigateAnimation.customPageRoute(GoogleBottomBar()));
                         }
                       },
                       child: const Text("Skip"),
@@ -159,7 +160,7 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                       onPressed: () {
                         if (_currentPage == widget.pages.length - 1) {
                           Navigator.of(context).push(
-                              NavigateAnimation.customPageRoute(Welcome()));
+                              NavigateAnimation.customPageRoute(GoogleBottomBar()));
                         } else {
                           _pageController.animateToPage(
                             _currentPage + 1,
