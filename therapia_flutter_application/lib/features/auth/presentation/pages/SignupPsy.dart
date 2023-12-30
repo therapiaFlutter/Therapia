@@ -11,8 +11,8 @@ import 'package:therapia_flutter_application/features/auth/presentation/pages/Lo
 import 'package:therapia_flutter_application/core/exceptions/FormValidation.dart';
 import 'package:therapia_flutter_application/core/widgets/NavigateAnimation.dart';
 
-class Signup extends StatelessWidget {
-  Signup({Key? key});
+class SignupPsy extends StatelessWidget {
+  SignupPsy({Key? key});
 
   // text editing controllers
   final TextEditingController usernameController = TextEditingController();
@@ -32,7 +32,7 @@ class Signup extends StatelessWidget {
               password: passwordController.text,
             )
             .then((value) {
-          postDetailsToFirestore(emailController.text, 'student');
+          postDetailsToFirestore(emailController.text, 'psy');
         }).catchError((e) {
           // Handle registration failures, you can display an error message
           print("Error during registration: $e");
