@@ -1,6 +1,9 @@
-// ignore_for_file: prefer_const_constructors, file_names, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:therapia_flutter_application/Pages/Testpsy.dart';
+import 'package:therapia_flutter_application/core/widgets/BottomNavBar.dart';
 import 'package:therapia_flutter_application/core/widgets/CustomLoginBtn.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/widgets/CustomTextField.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/widgets/SquareTile.dart';
@@ -8,15 +11,12 @@ import 'package:therapia_flutter_application/features/auth/domain/entities/user_
 import 'package:therapia_flutter_application/features/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:therapia_flutter_application/features/auth/presentation/pages/SignupPage.dart';
 import 'package:therapia_flutter_application/core/colors/PageBackground.dart';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-
 import 'package:go_router/go_router.dart';
+import 'package:therapia_flutter_application/features/auth/presentation/pages/intro_screens.dart';
+import 'package:therapia_flutter_application/features/psychotherapist/presentation/pages/PsyIntroScreens.dart';
 import 'package:validators/validators.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key});
@@ -56,21 +56,18 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 25),
-                    // username textfield
                     CustomTextField(
                       controller: usernameController,
-                      hintText: 'Username',
+                      hintText: 'Email',
                       obscureText: false,
                     ),
                     const SizedBox(height: 10),
-                    // password textfield
                     CustomTextField(
                       controller: passwordController,
                       hintText: 'Password',
                       obscureText: true,
                     ),
                     const SizedBox(height: 10),
-                    // forgot password?
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: Row(
@@ -88,23 +85,17 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 25),
-                    // sign-in button
                     CustomButtonStyle(
                       onTap: () {
-                        // Dispatch the login event to the bloc
-                        final user = UserEntity(
-                          name: "",
-                          email: usernameController.text.trim(),
-                          password: passwordController.text.trim(),
+                        signIn(
+                          usernameController.text.trim(),
+                          passwordController.text.trim(),
+                          context,
                         );
-
-                        BlocProvider.of<AuthBloc>(context)
-                            .add(LoginEvent(user: user));
                       },
                       btnText: 'Login',
                     ),
                     const SizedBox(height: 50),
-                    // or continue with
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: Row(
@@ -137,7 +128,6 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 50),
-                    // Google and Facebook buttons
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -149,7 +139,6 @@ class LoginPage extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 50),
-                    // Register now link
                     InkWell(
                       onTap: () {
                         Navigator.push(
@@ -189,5 +178,48 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void signIn(String email, String password, BuildContext context) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      route(context);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
+  }
+
+  void route(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
+    var kk = FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.uid)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        if (documentSnapshot.get('role') == "psy") {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PsyIntroScreens(),
+            ),
+          );
+        } else {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => IntroScreens(),
+            ),
+          );
+        }
+      } else {
+        print('Document does not exist on the database');
+      }
+    });
   }
 }
