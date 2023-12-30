@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:therapia_flutter_application/Pages/ChooseRolePage.dart';
 import 'package:therapia_flutter_application/core/pages/page_not_found.dart';
 import 'package:therapia_flutter_application/core/widgets/BottomNavBar.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/pages/HomePage.dart';
@@ -21,7 +22,7 @@ class AppRouter {
         path: '/',
         name: 'authentication',
         builder: (context, state) {
-          return IntroScreens();
+          return ChooseRole();
         },
         routes: [
           GoRoute(
