@@ -2,20 +2,13 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:therapia_flutter_application/Pages/Testpsy.dart';
-import 'package:therapia_flutter_application/core/widgets/BottomNavBar.dart';
 import 'package:therapia_flutter_application/core/widgets/CustomLoginBtn.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/widgets/CustomTextField.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/widgets/SquareTile.dart';
-import 'package:therapia_flutter_application/features/auth/domain/entities/user_entity.dart';
-import 'package:therapia_flutter_application/features/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:therapia_flutter_application/features/auth/presentation/pages/SignupPage.dart';
 import 'package:therapia_flutter_application/core/colors/PageBackground.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:therapia_flutter_application/features/auth/presentation/pages/intro_screens.dart';
+import 'package:therapia_flutter_application/features/Students/presentation/pages/intro_screens.dart';
 import 'package:therapia_flutter_application/features/psychotherapist/presentation/pages/PsyIntroScreens.dart';
-import 'package:validators/validators.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatelessWidget {

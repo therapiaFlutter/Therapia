@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:therapia_flutter_application/core/widgets/BottomNavBar.dart';
 import 'package:therapia_flutter_application/core/widgets/OnboardingPageModel.dart';
 import 'package:therapia_flutter_application/core/widgets/NavigateAnimation.dart';
-import 'package:therapia_flutter_application/Pages/welcome_page.dart';
+
 
 
 class IntroScreens extends StatelessWidget {
@@ -85,28 +86,26 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                         Expanded(
                           flex: 1,
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Text(
-                                  item.title,
-                                  style: item.titleStyle,
-                                ),
+                              Text(
+                                item.title,
+                                style: item.titleStyle,
                               ),
+                              SizedBox(height: 8),
                               Container(
-                                constraints:
-                                    const BoxConstraints(maxWidth: 280),
+                                constraints: const BoxConstraints(maxWidth: 280),
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 1.0, vertical: 8.0),
+                                    horizontal: 16.0, vertical: 8.0),
                                 child: Text(
                                   item.description,
                                   textAlign: TextAlign.center,
                                   style: item.descriptionStyle,
                                 ),
-                              )
+                              ),
                             ],
                           ),
-                        )
+                        ),
                       ],
                     );
                   },
@@ -145,7 +144,7 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                       onPressed: () {
                         {
                           Navigator.of(context).push(
-                              NavigateAnimation.customPageRoute(Welcome()));
+                              NavigateAnimation.customPageRoute(GoogleBottomBar()));
                         }
                       },
                       child: const Text("Skip"),
@@ -160,7 +159,7 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                       onPressed: () {
                         if (_currentPage == widget.pages.length - 1) {
                           Navigator.of(context).push(
-                              NavigateAnimation.customPageRoute(Welcome()));
+                              NavigateAnimation.customPageRoute(GoogleBottomBar()));
                         } else {
                           _pageController.animateToPage(
                             _currentPage + 1,
@@ -187,7 +186,7 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

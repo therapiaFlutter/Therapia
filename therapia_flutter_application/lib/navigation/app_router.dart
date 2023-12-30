@@ -8,7 +8,7 @@ import 'package:therapia_flutter_application/features/Students/presentation/page
 import 'package:therapia_flutter_application/features/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:therapia_flutter_application/features/auth/presentation/pages/LoginPage.dart';
 import 'package:therapia_flutter_application/features/auth/presentation/pages/SignupPage.dart';
-import 'package:therapia_flutter_application/features/auth/presentation/pages/intro_screens.dart';
+import 'package:therapia_flutter_application/features/Students/presentation/pages/intro_screens.dart';
 
 class AppRouter {
   final AuthBloc authBloc;
