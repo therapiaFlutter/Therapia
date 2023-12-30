@@ -16,7 +16,7 @@ class CustomButtonStyle extends StatelessWidget {
        
        margin: const EdgeInsets.symmetric(horizontal: 35),
        decoration: BoxDecoration(
-         color: Color(0xFF734BFB),
+         color: Color(0xFF734afb),
          borderRadius: BorderRadius.circular(48),
          
        ),
