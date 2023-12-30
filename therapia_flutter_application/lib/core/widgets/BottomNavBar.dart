@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:therapia_flutter_application/Pages/HomePage.dart';
+import 'package:therapia_flutter_application/features/Students/presentation/pages/HomePage.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/pages/SettingsPage.dart';
 import 'package:therapia_flutter_application/features/psychotherapist/presentation/pages/PsychotherapistsPage.dart';
 import 'package:therapia_flutter_application/features/Blogs/presentation/pages/BlogsPage.dart';
