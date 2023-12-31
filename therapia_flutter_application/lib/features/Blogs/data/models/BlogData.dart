@@ -11,11 +11,7 @@ class BlogtData {
       psychotherapist: PsychotherapistData.psychotherapists[1],
       blogImg: "https://picsum.photos/id/1001/960/540",
     ),
-    Blog(
-      psychotherapist: PsychotherapistData.psychotherapists[0],
-      content:
-          "How many programmers does it take to change a light bulb? None, that’s a hardware problem.",
-    ),
+    
     Blog(
       psychotherapist: PsychotherapistData.psychotherapists[1],
       content:
