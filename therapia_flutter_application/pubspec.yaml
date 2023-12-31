@@ -13,6 +13,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  table_calendar: ^3.0.3
 
 
   cupertino_icons: ^1.0.2
@@ -23,6 +24,7 @@ dependencies:
   firebase_core: ^2.24.2
   flutter_native_splash: ^2.3.7
   flutter_launcher_icons: ^0.13.1
+  
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
