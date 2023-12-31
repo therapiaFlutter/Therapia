@@ -100,13 +100,11 @@ class _SettingsState extends State<Settings> {
             ),
             TextButton(
               onPressed: () {
-                // Perform actual logout action here
-                // For example, you can dispatch a logout event to your authentication bloc
+                
                 BlocProvider.of<AuthBloc>(context).add(LogoutEvent());
-                // Use GoRouter to navigate to the login page
                 GoRouter.of(context).go('/login');
 
-                Navigator.pop(context); // Close the dialog
+                Navigator.pop(context); 
               },
               child: const Text("Logout"),
             ),

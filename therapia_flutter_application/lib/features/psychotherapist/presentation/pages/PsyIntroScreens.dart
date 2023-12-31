@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:therapia_flutter_application/Pages/Testpsy.dart';
 import 'package:therapia_flutter_application/core/widgets/OnboardingPageModel.dart';
 import 'package:therapia_flutter_application/core/widgets/NavigateAnimation.dart';
-import 'package:therapia_flutter_application/Pages/welcome_page.dart';
 import 'package:therapia_flutter_application/features/psychotherapist/presentation/widgets/PsyBottomnavbar.dart';
 
 
