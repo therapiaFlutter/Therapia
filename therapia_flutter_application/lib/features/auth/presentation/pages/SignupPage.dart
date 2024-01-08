@@ -1,73 +1,21 @@
-// ignore_for_file: prefer_const_constructors, file_names, prefer_const_literals_to_create_immutables
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// signup.dart
 import 'package:flutter/material.dart';
 import 'package:therapia_flutter_application/core/widgets/CustomLoginBtn.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/widgets/CustomTextField.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/widgets/SquareTile.dart';
 import 'package:therapia_flutter_application/core/colors/PageBackground.dart';
+import 'package:therapia_flutter_application/features/auth/data/repositories/FirestoreRepository.dart';
+import 'package:therapia_flutter_application/features/auth/domain/repositories/AuthRepository.dart';
+import 'package:therapia_flutter_application/features/auth/domain/usecases/SignupUseCase.dart';
+import 'package:therapia_flutter_application/features/auth/presentation/bloc/SignupPresenter.dart';
 import 'package:therapia_flutter_application/features/auth/presentation/pages/LoginPage.dart';
 import 'package:therapia_flutter_application/core/exceptions/FormValidation.dart';
-import 'package:therapia_flutter_application/core/widgets/CustomToast.dart';
-import 'package:therapia_flutter_application/core/widgets/NavigateAnimation.dart';
+
 
 class Signup extends StatelessWidget {
-  Signup({Key? key});
+  Signup({Key? key}) : _presenter = SignupPresenter(SignupUseCase(AuthRepository(), FirestoreRepository()));
 
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  Future<void> _registerUser(BuildContext context) async {
-    try {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return LoadingAnimation();
-        },
-      );
-
-      if (_formKey.currentState?.validate() ?? false) {
-        await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(
-              email: emailController.text,
-              password: passwordController.text,
-            )
-            .then((value) {
-          Navigator.of(context, rootNavigator: true).pop();
-
-          postDetailsToFirestore(emailController.text, 'student');
-
-          CustomToast.show(context, 'Account created successfully', isSuccess: true);
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LoginPage(),
-            ),
-          );
-        }).catchError((e) {
-          Navigator.of(context, rootNavigator: true).pop();
-
-          CustomToast.show(context, 'Error during registration: $e', isSuccess: false);
-        });
-      }
-    } on FirebaseAuthException catch (e) {
-      Navigator.of(context, rootNavigator: true).pop();
-
-      CustomToast.show(context, 'Error during registration: ${e.message}', isSuccess: false);
-    }
-  }
-
-  postDetailsToFirestore(String email, String role) async {
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    var user = FirebaseAuth.instance.currentUser;
-    CollectionReference ref = FirebaseFirestore.instance.collection('users');
-    await ref.doc(user!.uid).set({'email': email, 'role': role});
-  }
+  final SignupPresenter _presenter;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +29,7 @@ class Signup extends StatelessWidget {
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Form(
-              key: _formKey,
+              key: _presenter.formKey,
               child: Container(
                 height: MediaQuery.of(context).size.height,
                 child: Center(
@@ -103,13 +51,13 @@ class Signup extends StatelessWidget {
                       ),
                       const SizedBox(height: 25),
                       CustomTextField(
-                        controller: usernameController,
+                        controller: _presenter.usernameController,
                         hintText: 'Username',
                         obscureText: false,
                       ),
                       const SizedBox(height: 10),
                       CustomTextField(
-                        controller: emailController,
+                        controller: _presenter.emailController,
                         hintText: 'Email',
                         obscureText: false,
                         validator: FormValidation.emailValidator,
@@ -117,7 +65,7 @@ class Signup extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 25.0),
                         child: Text(
-                          FormValidation.emailValidator(emailController.text) ?? '',
+                          FormValidation.emailValidator(_presenter.emailController.text) ?? '',
                           style: TextStyle(
                             color: Colors.red,
                             fontSize: 12,
@@ -126,7 +74,7 @@ class Signup extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
                       CustomTextField(
-                        controller: passwordController,
+                        controller: _presenter.passwordController,
                         hintText: 'Password',
                         obscureText: true,
                         validator: FormValidation.passwordValidator,
@@ -134,7 +82,7 @@ class Signup extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 25.0),
                         child: Text(
-                          FormValidation.passwordValidator(passwordController.text) ?? '',
+                          FormValidation.passwordValidator(_presenter.passwordController.text) ?? '',
                           style: TextStyle(
                             color: Colors.red,
                             fontSize: 12,
@@ -144,9 +92,9 @@ class Signup extends StatelessWidget {
                       const SizedBox(height: 30),
                       CustomButtonStyle(
                         onTap: () {
-                          if (_formKey.currentState?.validate() ?? false) {
-                            _formKey.currentState?.save();
-                            _registerUser(context);
+                          if (_presenter.formKey.currentState?.validate() ?? false) {
+                            _presenter.formKey.currentState?.save();
+                            _presenter.registerUser(context);
                           }
                         },
                         btnText: 'Create Account',
