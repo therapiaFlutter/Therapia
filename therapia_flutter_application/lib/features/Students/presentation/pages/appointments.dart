@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:therapia_flutter_application/core/colors/PageBackground.dart';
@@ -202,7 +204,7 @@ Widget build(BuildContext context) {
                           onPressed: () => openNoteBox(docID: docID),
                           icon: const Icon(
                             Icons.edit,
-                            color: Colors.blue, // Set the icon color
+                            color:  Color(0xFF734afb), // Set the icon color
                           ),
                         ),
 
@@ -221,7 +223,7 @@ Widget build(BuildContext context) {
               },
             );
           } else {
-            return const Center(child: Text("No notes."));
+            return const Center(child: Text("No Appointments."));
           }
         },
       ),
@@ -234,8 +236,8 @@ Widget build(BuildContext context) {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("Delete Note"),
-          content: Text("Are you sure you want to delete this note?"),
+          title: Text("Delete Appointment"),
+          content: Text("Are you sure you want to delete this Appointment?"),
           actions: [
             TextButton(
               onPressed: () {
@@ -243,7 +245,7 @@ Widget build(BuildContext context) {
               },
               child: Text(
                 "Cancel",
-                style: TextStyle(color: Colors.blue), // Set the text color
+                style: TextStyle(color:  Color(0xFF734afb)), // Set the text color
               ),
             ),
             ElevatedButton(
