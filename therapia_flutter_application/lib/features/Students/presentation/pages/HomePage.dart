@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
           padding: EdgeInsets.all(16),
           child: Column(
             children: [
-              //header section
+              
 SizedBox(height: 8),
               Row(
                 children: [
