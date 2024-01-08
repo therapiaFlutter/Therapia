@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:therapia_flutter_application/features/auth/data/repositories/FirestoreRepository.dart';
-import 'package:therapia_flutter_application/features/auth/domain/repositories/AuthRepository.dart';
+import 'package:therapia_flutter_application/features/auth/domain/repositories/RegisterRepository.dart';
 
 class SignupUseCase {
   final AuthRepository _authRepository;

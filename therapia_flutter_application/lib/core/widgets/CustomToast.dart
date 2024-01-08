@@ -6,7 +6,7 @@ class CustomToast {
       SnackBar(
         content: Text(message),
         backgroundColor: isSuccess ? Colors.green : Colors.red,
-        duration: Duration(seconds: 15),
+        duration: Duration(seconds: 7),
       ),
     );
   }

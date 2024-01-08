@@ -5,7 +5,7 @@ import 'package:therapia_flutter_application/features/Students/presentation/widg
 import 'package:therapia_flutter_application/features/Students/presentation/widgets/SquareTile.dart';
 import 'package:therapia_flutter_application/core/colors/PageBackground.dart';
 import 'package:therapia_flutter_application/features/auth/data/repositories/FirestoreRepository.dart';
-import 'package:therapia_flutter_application/features/auth/domain/repositories/AuthRepository.dart';
+import 'package:therapia_flutter_application/features/auth/domain/repositories/RegisterRepository.dart';
 import 'package:therapia_flutter_application/features/auth/domain/usecases/SignupUseCase.dart';
 import 'package:therapia_flutter_application/features/auth/presentation/bloc/SignupPresenter.dart';
 import 'package:therapia_flutter_application/features/auth/presentation/pages/LoginPage.dart';
@@ -42,7 +42,7 @@ class Signup extends StatelessWidget {
                       ),
                       const SizedBox(height: 25),
                       Text(
-                        'Welcome Back !',
+                        'Welcome !',
                         style: TextStyle(
                           fontFamily: 'Quicksand',
                           fontWeight: FontWeight.w600,
@@ -55,23 +55,14 @@ class Signup extends StatelessWidget {
                         hintText: 'Username',
                         obscureText: false,
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 25),
                       CustomTextField(
                         controller: _presenter.emailController,
                         hintText: 'Email',
                         obscureText: false,
                         validator: FormValidation.emailValidator,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 25.0),
-                        child: Text(
-                          FormValidation.emailValidator(_presenter.emailController.text) ?? '',
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ),
+                      
                       const SizedBox(height: 10),
                       CustomTextField(
                         controller: _presenter.passwordController,
@@ -79,16 +70,7 @@ class Signup extends StatelessWidget {
                         obscureText: true,
                         validator: FormValidation.passwordValidator,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 25.0),
-                        child: Text(
-                          FormValidation.passwordValidator(_presenter.passwordController.text) ?? '',
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ),
+                    
                       const SizedBox(height: 30),
                       CustomButtonStyle(
                         onTap: () {
