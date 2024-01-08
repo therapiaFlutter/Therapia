@@ -9,38 +9,56 @@ import 'package:therapia_flutter_application/features/Students/presentation/widg
 import 'package:therapia_flutter_application/core/colors/PageBackground.dart';
 import 'package:therapia_flutter_application/features/auth/presentation/pages/LoginPage.dart';
 import 'package:therapia_flutter_application/core/exceptions/FormValidation.dart';
+import 'package:therapia_flutter_application/core/widgets/CustomToast.dart';
 import 'package:therapia_flutter_application/core/widgets/NavigateAnimation.dart';
 
 class Signup extends StatelessWidget {
   Signup({Key? key});
 
-  // text editing controllers
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
- Future<void> _registerUser(BuildContext context) async {
+  Future<void> _registerUser(BuildContext context) async {
     try {
-      if (_formKey.currentState?.validate() ?? false) {
-        CircularProgressIndicator();
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return LoadingAnimation();
+        },
+      );
 
+      if (_formKey.currentState?.validate() ?? false) {
         await FirebaseAuth.instance
             .createUserWithEmailAndPassword(
               email: emailController.text,
               password: passwordController.text,
             )
             .then((value) {
+          Navigator.of(context, rootNavigator: true).pop();
+
           postDetailsToFirestore(emailController.text, 'student');
+
+          CustomToast.show(context, 'Account created successfully', isSuccess: true);
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LoginPage(),
+            ),
+          );
         }).catchError((e) {
-          // Handle registration failures, you can display an error message
-          print("Error during registration: $e");
+          Navigator.of(context, rootNavigator: true).pop();
+
+          CustomToast.show(context, 'Error during registration: $e', isSuccess: false);
         });
       }
     } on FirebaseAuthException catch (e) {
-      // Handle registration failures, you can display an error message
-      print("Error during registration: ${e.message}");
+      Navigator.of(context, rootNavigator: true).pop();
+
+      CustomToast.show(context, 'Error during registration: ${e.message}', isSuccess: false);
     }
   }
 
@@ -84,49 +102,56 @@ class Signup extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 25),
-                      // username textfield
                       CustomTextField(
                         controller: usernameController,
                         hintText: 'Username',
                         obscureText: false,
                       ),
                       const SizedBox(height: 10),
-                      // email textfield
                       CustomTextField(
                         controller: emailController,
                         hintText: 'Email',
                         obscureText: false,
                         validator: FormValidation.emailValidator,
                       ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 25.0),
+                        child: Text(
+                          FormValidation.emailValidator(emailController.text) ?? '',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
                       const SizedBox(height: 10),
-                      // password textfield
                       CustomTextField(
                         controller: passwordController,
                         hintText: 'Password',
                         obscureText: true,
                         validator: FormValidation.passwordValidator,
                       ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 25.0),
+                        child: Text(
+                          FormValidation.passwordValidator(passwordController.text) ?? '',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
                       const SizedBox(height: 30),
-
-                      // sign-in button
-                      // Inside your CustomButtonStyle widget, update the onTap function
                       CustomButtonStyle(
                         onTap: () {
                           if (_formKey.currentState?.validate() ?? false) {
                             _formKey.currentState?.save();
                             _registerUser(context);
-                            Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginPage()),
-                          );
                           }
                         },
                         btnText: 'Create Account',
                       ),
-
                       const SizedBox(height: 30),
-                      // or continue with
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 25.0),
                         child: Row(
@@ -138,8 +163,7 @@ class Signup extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
                               child: Text(
                                 'Or continue with',
                                 style: TextStyle(
@@ -159,25 +183,22 @@ class Signup extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 30),
-                      // Google and Facebook buttons
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SquareTile(
-                              imagePath: 'lib/core/assets/images/google.png'),
+                          SquareTile(imagePath: 'lib/core/assets/images/google.png'),
                           SizedBox(width: 25),
-                          SquareTile(
-                              imagePath: 'lib/core/assets/images/facebook.png')
+                          SquareTile(imagePath: 'lib/core/assets/images/facebook.png')
                         ],
                       ),
                       const SizedBox(height: 50),
-                      // Register now link
                       InkWell(
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginPage()),
+                              builder: (context) => LoginPage(),
+                            ),
                           );
                         },
                         child: Row(
