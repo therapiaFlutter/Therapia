@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/pages/HomePage.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/pages/SettingsPage.dart';
-import 'package:therapia_flutter_application/features/psychotherapist/presentation/pages/PsychotherapistsPage.dart';
+import 'package:therapia_flutter_application/features/Students/presentation/pages/PsychotherapistsPage.dart';
 import 'package:therapia_flutter_application/features/Blogs/presentation/pages/BlogsPage.dart';
 
 void main() => runApp(const MyApp());
+final GlobalKey<NavigatorState> settingsNavigatorKey = GlobalKey<NavigatorState>();
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -23,6 +25,7 @@ class MyApp extends StatelessWidget {
 
 class GoogleBottomBar extends StatefulWidget {
   const GoogleBottomBar({Key? key}) : super(key: key);
+  
 
   @override
   State<GoogleBottomBar> createState() => _GoogleBottomBarState();
@@ -35,7 +38,16 @@ class _GoogleBottomBarState extends State<GoogleBottomBar> {
     HomePage(),
     BlogsPage(),
     PsychotherapistsPage(),
-    Settings()
+    Navigator(
+      key: settingsNavigatorKey,
+      onGenerateRoute: (RouteSettings settings) {
+        return MaterialPageRoute(
+          builder: (BuildContext context) {
+            return Settings(); 
+          },
+        );
+      },
+    ),
   ];
 
   @override
@@ -67,6 +79,9 @@ final _navBarItems = [
     ),
     selectedColor: Color(0xFF734BFB),
   ),
+
+
+
   SalomonBottomBarItem(
     icon: const Icon(Icons.feed),
     title: const Text(
@@ -76,6 +91,9 @@ final _navBarItems = [
     ),
     selectedColor: Color(0xFF734BFB),
   ),
+
+
+
   SalomonBottomBarItem(
     icon: const Icon(Icons.person),
     title: const Text(
@@ -85,6 +103,9 @@ final _navBarItems = [
     ),
     selectedColor: Color(0xFF734BFB),
   ),
+
+
+  
   SalomonBottomBarItem(
     icon: const Icon(Icons.settings),
     title: const Text(

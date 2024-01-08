@@ -7,7 +7,6 @@ import 'package:therapia_flutter_application/features/Students/presentation/page
 import 'package:therapia_flutter_application/features/psychotherapist/presentation/pages/PsyAppointments.dart';
 import 'package:therapia_flutter_application/features/psychotherapist/presentation/pages/PsyHomepage.dart';
 import 'package:therapia_flutter_application/features/psychotherapist/presentation/pages/PsySettings.dart';
-import 'package:therapia_flutter_application/features/psychotherapist/presentation/pages/PsychotherapistsPage.dart';
 import 'package:therapia_flutter_application/features/Blogs/presentation/pages/BlogsPage.dart';
 
 void main() => runApp(const MyApp());

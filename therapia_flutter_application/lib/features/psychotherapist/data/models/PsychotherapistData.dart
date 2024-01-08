@@ -5,17 +5,17 @@ class PsychotherapistData {
     Psychotherapist(
       name: "sliemn labyedh",
       image: "lib/core/assets/images/psyImg.jpg",
-      location: "Cite ibn khaldoun",
+      location: "balas jannet",
     ),
     Psychotherapist(
-      name: "sliemn labyedh",
+      name: "dr lakhel",
       image: "lib/core/assets/images/psyImg.jpg",
       location: "Cite ibn khaldoun",
     ),
     Psychotherapist(
-      name: "sliemn labyedh",
+      name: "dr K l hendi l massa5",
       image: "lib/core/assets/images/psyImg.jpg",
-      location: "Cite ibn khaldoun",
+      location: "INDIA XD",
     ),
     Psychotherapist(
       name: "sliemn labyedh",

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:therapia_flutter_application/core/colors/PageBackground.dart';
 import 'package:therapia_flutter_application/features/Students/presentation/pages/Profile.dart';
+import 'package:therapia_flutter_application/features/Students/presentation/pages/appointments.dart';
 import 'package:therapia_flutter_application/features/auth/presentation/bloc/auth/auth_bloc.dart';
 
 class Settings extends StatefulWidget {
@@ -54,6 +55,11 @@ class _SettingsState extends State<Settings> {
                   _CustomListTile(
                     title: "My Appointments",
                     icon: Icons.calendar_today_rounded,
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Appointment(),
+                      ));
+                    },
                   ),
                 ],
               ),
@@ -138,7 +144,13 @@ class _CustomListTile extends StatelessWidget {
         ),
       ),
       leading: Icon(icon),
-      onTap: onTap,
+      onTap: onTap != null
+          ? () {
+              if (onTap != null) {
+                onTap!();
+              }
+            }
+          : null,
     );
   }
 }
