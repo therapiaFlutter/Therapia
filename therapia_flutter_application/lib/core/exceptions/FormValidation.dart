@@ -1,9 +1,7 @@
-
-
 class FormValidation {
   static String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter some text';
+      return null; 
     }
 
     bool emailValid = RegExp(
@@ -18,7 +16,7 @@ class FormValidation {
 
   static String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter some text';
+      return null; 
     }
 
     if (value.length < 8) {
