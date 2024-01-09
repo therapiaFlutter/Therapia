@@ -77,7 +77,8 @@ class BlogsPage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(8.0),
                                 image: DecorationImage(
                                   fit: BoxFit.cover,
-                                  image: NetworkImage(item.blogImg!),
+                                  image: AssetImage(item.blogImg!),
+                                  
                                 ),
                               ),
                             ),
