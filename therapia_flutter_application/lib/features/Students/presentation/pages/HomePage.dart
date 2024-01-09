@@ -44,8 +44,6 @@ SizedBox(height: 8),
                   ),
                 ],
               ),
-
-              // Add a smaller SizedBox here
               SizedBox(height: 8),
               Container(
   decoration: BoxDecoration(
@@ -221,7 +219,7 @@ SizedBox(height: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 image: DecorationImage(
-                                  image: NetworkImage(blog.blogImg ?? ''),
+                                  image: AssetImage(blog.blogImg ?? ''),
                                   fit: BoxFit.cover,
                                 ),
                               ),
