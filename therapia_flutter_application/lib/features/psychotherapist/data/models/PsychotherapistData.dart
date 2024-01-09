@@ -3,29 +3,29 @@ import 'package:therapia_flutter_application/features/psychotherapist/domain/ent
 class PsychotherapistData {
   static final List<Psychotherapist> psychotherapists = [
     Psychotherapist(
-      name: "sliemn labyedh",
-      image: "lib/core/assets/images/psyImg.jpg",
-      location: "balas jannet",
+      name: "Mme Manel ALBOUCHI",
+      image: "lib/core/assets/images/manel.jpg",
+      location: "La Marsa Tunis Tunisie  ",
     ),
     Psychotherapist(
-      name: "dr lakhel",
+      name: "Kamel ABDELHAK",
       image: "lib/core/assets/images/psyImg.jpg",
-      location: "Cite ibn khaldoun",
+      location: "Hammam Lif Ben arous Tunisie  ",
     ),
     Psychotherapist(
-      name: "dr K l hendi l massa5",
+      name: "Mme Nedia BEN SLAMA",
       image: "lib/core/assets/images/psyImg.jpg",
-      location: "INDIA XD",
+      location: "Tunis Belvédère Tunis Tunisie ",
     ),
     Psychotherapist(
-      name: "sliemn labyedh",
+      name: "Mr Aymen KHALSI",
       image: "lib/core/assets/images/psyImg.jpg",
-      location: "Cite ibn khaldoun",
+      location: "Tunis Belvédère Tunis Tunisie  ",
     ),
     Psychotherapist(
-      name: "sliemn labyedh",
+      name: "Mme Sawsen GHRAIRI",
       image: "lib/core/assets/images/psyImg.jpg",
-      location: "Cite ibn khaldoun",
+      location: "El Mourouj 1 Ben arous Tunisie  ",
     ),
   ];
 }
