@@ -25,20 +25,16 @@ class _PsychotherapistDetailsPageState
   @override
   void initState() {
     super.initState();
-    // Initialize the psychotherapist variable in the initState method
     psychotherapist = widget.psychotherapist;
   }
 
   void openNoteBox({String? docID}) async {
-    // Text controllers for title and description
     final titleController = TextEditingController();
     final descriptionController = TextEditingController();
 
-    // Initialize the state for the date and time
     DateTime selectedDate = DateTime.now();
     TimeOfDay selectedTime = TimeOfDay.now();
 
-    // Fetch the document from Firestore and populate the fields
     if (docID != null) {
       DocumentSnapshot documentSnapshot =
           await firestoreService.getNoteById(docID);
@@ -50,7 +46,6 @@ class _PsychotherapistDetailsPageState
       Timestamp dateTimestamp = data['date'] as Timestamp;
       DateTime date = dateTimestamp.toDate();
 
-      // Ensure 'note' field is not null
       String noteText = data['note'] ?? '';
 
       selectedDate = date;
@@ -146,6 +141,8 @@ class _PsychotherapistDetailsPageState
                         date: selectedDate,
                         time: selectedTime,
                       );
+                      _showSnackbarAdd(
+                          "Appointment created successfully"); // Show the Snackbar
                     } else {
                       firestoreService.updateNote(
                         docID: docID,
@@ -227,6 +224,16 @@ class _PsychotherapistDetailsPageState
             const SizedBox(height: 16),
           ],
         ),
+      ),
+    );
+  }
+
+  void _showSnackbarAdd(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 2),
+        backgroundColor: Colors.green,
       ),
     );
   }

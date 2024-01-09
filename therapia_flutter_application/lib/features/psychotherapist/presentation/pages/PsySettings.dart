@@ -51,10 +51,6 @@ class _psySettingsState extends State<psySettings> {
                       );
                     },
                   ),
-                  _CustomListTile(
-                    title: "My Appointments",
-                    icon: Icons.calendar_today_rounded,
-                  ),
                 ],
               ),
               const Divider(),
